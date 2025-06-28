@@ -1,0 +1,11 @@
+{
+    "db": {
+        "host":"db host",
+        "port":5432,
+        "database":"database name",
+        "user":"user for db connection",
+        "pass":"pass for db connection"
+    },
+    "basedomain":"https://aro.lfv.se",
+    "notampage":"https://www.aro.lfv.se/Links/Link/ShowFileList?type=AIS&path=%5Cpibsweden%5C&torlinkName=NOTAM%20Sweden"
+}
