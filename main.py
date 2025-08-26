@@ -6,7 +6,7 @@ import pdfplumber
 import json
 import psycopg2
 from bs4 import BeautifulSoup
-from datetime import datetime
+from datetime import datetime, timezone
 
 with open("config.json", "r", encoding="utf-8") as file:
     config = json.load(file)
@@ -165,7 +165,7 @@ for localairport, localairportdata in all_airports["24hrs"].items():
             ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """
             cursor.execute(query, (
-                locdata["type"], locdata["notam"], locdata["from"], locdata["to"].lstrip().strip(), localairport, datetime.now().strftime('%Y-%m-%d %H:%M:%S'), locdata["perm"], locdata["active"]
+                locdata["type"], locdata["notam"], locdata["from"], locdata["to"].lstrip().strip(), localairport, datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S'), locdata["perm"], locdata["active"]
             ))
             twentyfourhrs_notamslist.append(locdata["notam"] + localairport + locdata["from"] + locdata["to"])
         except Exception as e:
@@ -188,7 +188,7 @@ for localairport, localairportdata in all_airports["all"].items():
             ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             """
             cursor.execute(query, (
-                locdata["type"], locdata["notam"], locdata["from"], locdata["to"], localairport, datetime.now().strftime('%Y-%m-%d %H:%M:%S'), locdata["perm"], locdata["active"]
+                locdata["type"], locdata["notam"], locdata["from"], locdata["to"], localairport, datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S'), locdata["perm"], locdata["active"]
             ))
         except Exception as e:
             print(str(locdata))
